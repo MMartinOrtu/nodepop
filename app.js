@@ -16,6 +16,7 @@ app.engine('html', require('ejs').__express);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./lib/connectMongoose');
 require('./models/Add')
 
+// Global variables
+app.locals.title = 'Nodepop';
 /**
  * API routes
  */
@@ -34,7 +37,7 @@ app.use('/apiv1/adds', require('./routes/apiv1/adds'));
 /**
  * web app routes
  */
-app.use('/',      require('./routes/index'));
+app.use('/',           require('./routes/index'));
 
 
 

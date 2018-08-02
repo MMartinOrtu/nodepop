@@ -1,17 +1,38 @@
 {
     "adds": [        
         {
-        "nombre": "Bicicleta",
-        "venta": true,
-        "precio": 230.15,
-        "foto": "bici.jpg",
+        "name": "Bicicleta",
+        "toSell": true,
+        "price": 230.15,
+        "picture": "/images/adds/bici.jpg",
         "tags": [ "lifestyle", "motor"]
         },
         {
-        "nombre": "iPhone 3GS",
-        "venta": false,
-        "precio": 50.00,
-        "foto": "iphone.png",
+        "name": "iPhone 3GS",
+        "toSell": false,
+        "price": 50.00,
+        "picture": "/images/adds/iphone.jpg",
+        "tags": [ "lifestyle", "mobile"]
+        },
+        {
+        "name": "Portátil",
+        "toSell": true,
+        "price": 250.00,
+        "picture": "/images/adds/laptop.jpg",
+        "tags": [ "work"]
+        },
+        {
+        "name": "Coche",
+        "toSell": true,
+        "price": 12500.00,
+        "picture": "/images/adds/car.jpg",
+        "tags": [ "motor"]
+        },
+        {
+        "name": "Samsung Galaxy",
+        "toSell": true,
+        "price": 150.00,
+        "picture": "/images/adds/samsung.jpg",
         "tags": [ "lifestyle", "mobile"]
         }
     ]
