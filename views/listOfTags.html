@@ -7,9 +7,10 @@
   <body>
     <h1><%=title%></h1>
     <h3>List of tags</h3>
-    <% adds.forEach(function(add){ %>
-       <p><%= add%></p>
-       
-    <% }) %>
+    <ul>
+      <% adds.forEach(function(add){ %>
+        <li><%= add%></li>      
+      <% }) %>
+  </ul> 
   </body>
 </html>

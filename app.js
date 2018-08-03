@@ -39,8 +39,6 @@ app.use('/apiv1/adds', require('./routes/apiv1/adds'));
  */
 app.use('/',           require('./routes/index'));
 
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -48,6 +46,15 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+  // validation error
+  if(err.array){
+    err.status = 422;
+    const errorInfo = err.array({onlyFirstError: true})[0];
+    err.message = isAPI(req) ?
+    {message: 'Not valid', errors: err.mapped()}
+    : `Not valid - ${errorInfo.param} ${errorInfo.msg}`;
+  }
   
   res.status(err.status || 500);
   

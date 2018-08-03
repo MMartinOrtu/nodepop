@@ -62,3 +62,14 @@ p{
   font-size:.9rem;
   color:rgb(5, 104, 82); 
 }
+ul{
+  padding: 0;
+  margin:0;
+}
+li{
+  font-size: 2rem;
+  list-style: none;
+  color: white;
+  text-align: center;
+  margin: .5rem;
+}

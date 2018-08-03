@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 
+const{query} = require('express-validator/check');
+
 //  require AddSchema
 const Add = require('../models/Add');
 
@@ -9,7 +11,11 @@ const Add = require('../models/Add');
  * GET /
  * Home page, get a list of adds
  */
-router.get('/', Add.getAdds);
+
+
+router.get('/', [    
+    query('toSell').isBoolean().withMessage('debe ser un valor booleano')           
+], Add.getAdds);
 
 /**
  * GET/:tags?

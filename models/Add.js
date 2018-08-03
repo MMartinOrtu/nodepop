@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const{validationResult} = require('express-validator/check');
 
 const {isAPI} = require('../lib/utils');
 
@@ -13,16 +14,16 @@ const addSchema = mongoose.Schema({
     tags: [String] 
 });
 
-// create a static methods
-
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
+// get the request params in query string
 addSchema.statics.getAdds = async function (req, res, next){
+    
     try{
+        //If req.query is empty does not send an error
+              
+        if(req.validationResult !== undefined){
+            validationResult(req).throw();                
+        }
+       
         // get entry data
         const name = req.query.name; 
         const toSell = req.query.toSell;
@@ -32,7 +33,7 @@ addSchema.statics.getAdds = async function (req, res, next){
         const skip = parseInt(req.query.skip);
         const fields = req.query.fields;
         const sort = req.query.sort;
-                  
+        
         //create empty filter
         const filter ={};
 
@@ -60,28 +61,16 @@ addSchema.statics.getAdds = async function (req, res, next){
             filter.tags = {$in: arraytags}
         }
         
-        const adds = await Add.queryItems(filter, limit, skip, fields, sort);
+        const adds = await Add.getList(filter, limit, skip, fields, sort);
         sendResult(adds, 'index', req, res);
 
-/*         if(isAPI(req)){
-           res.json({success: true, result: adds});
-           return;
-        }
-        res.render('index'); */
     }catch(err){
         next(err);
     } 
 }
 
-/**
- * 
- * @param {*} filter 
- * @param {*} limit 
- * @param {*} skip 
- * @param {*} fields 
- * @param {*} sort 
- */
-addSchema.statics.queryItems = function(filter, limit, skip, fields, sort){
+// returns a list of adss, appliying filters
+addSchema.statics.getList = function(filter, limit, skip, fields, sort){
     const query = Add.find(filter);
     query.limit(limit);
     query.skip(skip);
@@ -90,13 +79,7 @@ addSchema.statics.queryItems = function(filter, limit, skip, fields, sort){
     return query.exec();
 };
 
-// returns a list of tags
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
+//returns a list of tags
 addSchema.statics.listOfTags = async function(req, res, next){
     try{
         const data = req.params.tags;
@@ -108,12 +91,8 @@ addSchema.statics.listOfTags = async function(req, res, next){
     }
 
 }
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
+
+// create a new add
 addSchema.statics.newAdd = async function (req, res, next){
     try{
         console.log(req.body)
@@ -140,13 +119,6 @@ addSchema.statics.newAdd = async function (req, res, next){
 const Add = mongoose.model('Add', addSchema);
 
 // returns a the result of the request: JSON if its an API request or VIEW to render HTML
-/**
- * 
- * @param {*} api 
- * @param {*} view 
- * @param {*} req 
- * @param {*} res 
- */
 function sendResult(result, view, req, res){
     if(isAPI(req)){
         res.json({success: true, result: result});
