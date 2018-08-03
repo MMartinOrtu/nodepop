@@ -13,7 +13,9 @@ const Add = require('../../models/Add');
  * Returns a list of adds
  */
 router.get('/?',[    
-    query('toSell').isBoolean().withMessage('debe ser un valor booleano')           
+    query('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
+    query('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
+    query('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')            
 ], 
  Add.getAdds);
 

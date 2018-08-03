@@ -12,9 +12,10 @@ const Add = require('../models/Add');
  * Home page, get a list of adds
  */
 
-
-router.get('/', [    
-    query('toSell').isBoolean().withMessage('debe ser un valor booleano')           
+router.get('/', [  
+    query('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
+    query('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
+    query('tags').optional({checkfalsy:true}).isAlpha().withMessage('debes escribir solo letras')          
 ], Add.getAdds);
 
 /**

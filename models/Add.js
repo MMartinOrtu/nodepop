@@ -15,14 +15,10 @@ const addSchema = mongoose.Schema({
 });
 
 // get the request params in query string
-addSchema.statics.getAdds = async function (req, res, next){
-    
-    try{
-        //If req.validationResult iis not undefines throws an error in case the the req.query don´t validate   
-        if(req.validationResult !== undefined){
-            validationResult(req).throw();                
-        }
-       
+addSchema.statics.getAdds = async function (req, res, next){    
+    try{     
+        validationResult(req).throw();
+
         // get entry data
         const name = req.query.name; 
         const toSell = req.query.toSell;
@@ -57,7 +53,7 @@ addSchema.statics.getAdds = async function (req, res, next){
         }
         if(tags){
             const arraytags = tags.split(" ");
-            filter.tags = {$in: arraytags}
+            filter.tags = {$in: arraytags};
         }
         
         const adds = await Add.getList(filter, limit, skip, fields, sort);
@@ -81,27 +77,26 @@ addSchema.statics.getList = function(filter, limit, skip, fields, sort){
 //returns a list of tags
 addSchema.statics.listOfTags = async function(req, res, next){
     try{
-        const data = req.params.tags;
-       
+        const data = req.params.tags;       
         const tagslist = await Add.distinct(data).exec()
+
         sendResult(tagslist, 'listOfTags', req, res);
     }catch(err){
         next(err);
     }
-
 }
 
 // create a new add
 addSchema.statics.newAdd = async function (req, res, next){
     try{
-        console.log(req.body)
-        console.log(req.file)
         const dataAdd = req.body;
+
         //if a picture is uploaded, set the route file in the picture property
         if(req.file){
           dataAdd.picture = 'images/uploads/'+ req.file.filename;
         }
-       //Create an add in memory
+
+        //Create an add in memory
         const add = new Add(dataAdd);
         
         //Save the add in th database
@@ -110,14 +105,11 @@ addSchema.statics.newAdd = async function (req, res, next){
          sendResult(addSaved, '', req, res);
  
      }catch(err){
-         next(err);
+        next(err);
      }
 }
 
-// create the model with the schema
-const Add = mongoose.model('Add', addSchema);
-
-// returns a the result of the request: JSON if its an API request or VIEW to render HTML
+// this function returns the result of the request: JSON if its an API request or VIEW to render HTML
 function sendResult(result, view, req, res){
     if(isAPI(req)){
         res.json({success: true, result: result});
@@ -125,5 +117,12 @@ function sendResult(result, view, req, res){
      }
      res.render(view, { adds: result});
 }
+
+
+// create the model with the schema
+const Add = mongoose.model('Add', addSchema);
+
+
+
 
 module.exports = Add;
