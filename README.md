@@ -1,27 +1,23 @@
-<h1 align=center style="color:rgb(5, 141, 112); font-size:80px">NODEPOP</h1>
-
+<p align=center><img src="data/Nodepop-readme.png"></p>
 
 
 Nodepop is a web-API made with Nodejs and Express to buy anda sell second-hand items.
 
 This is a project of the Web Development Bootcamp of Keepcoding.
 
-<h2 style="color:lightseagreen">Installation</h2>
-
+## Installation
 ___
 
 ```shell
 npm install
 ```
 Copy .env.example to .env and review values
-<br>
-<br>
 
 
 
-<h2 style="color:lightseagreen">Database</h2>
-
+## Database
 ___
+
 
 This API has been made using Mongoose and MongoDB.
 
@@ -33,8 +29,6 @@ npm run install_db
 By doing this you delete all the items you had in your database (in case you had any) and initialize the database with 5 new items. 
 
 You can check the JSON used to initialize the database in *./data/adds.json*
-<br>
-<br>
 
 Theres is an schema created for each add:
 ```js
@@ -48,21 +42,18 @@ const addSchema = mongoose.Schema({
 ```
 You must follow this schema to create new adds.
 
-<h2 style="color:lightseagreen">Run</h2>
- 
- ___
+## Run
+___
 
 To start the application in production use:
 
 ```shell
 npm start
 ```
-<br>
 
 
 
-<h2 style="color:lightseagreen">Development</h2>
-
+## Development
 ___
 
 To start the application in development use:
@@ -70,11 +61,9 @@ To start the application in development use:
 ```shell
 npm run dev
 ```
-<br>
 
 
-<h2 style="color:lightseagreen">Guide of use</h2>
-
+## Guide if use
 ___
 
 Nodepop is an API that provides a list of second-hand items. The API supports the following operations:
@@ -83,7 +72,7 @@ Nodepop is an API that provides a list of second-hand items. The API supports th
 - List of existing tags.
 - Create new adds
 
-## Applyng filters
+### **Applying filters**
 
 To aplly filters by *price range* you need to consider the following rules:
 - 10-50 :  Use the "-" to specify a **range** between two values.
@@ -96,14 +85,16 @@ To get a list of all existing tag you must pass the word "**tags**" as a param i
 The toSell property is a boolean so you have to write *true* to see the selling items, and *false* to see the buying items.
 
 
-## Creating new adds
+### **Creating new adds**
 
 When creating a new add using the *POST* method (in Postman, for instance) you can upload an image which will be saved in the "uploads" folder, inside of ./public/images
 
-## Web Client
+### **Web Client**
 
 There is and index.html view from which you can view the list of adds and apply the same filters and paginated list than in the API. You can also get the list of tags by writing  */tags* in the URL.
 
 This is an example of the index.html view:
 
-![Nodepop index.html view](data/Foto-readme.png)
+<p align=center><img src="data/Foto-readme.png"></p>
+   
+

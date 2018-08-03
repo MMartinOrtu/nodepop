@@ -18,8 +18,7 @@ const addSchema = mongoose.Schema({
 addSchema.statics.getAdds = async function (req, res, next){
     
     try{
-        //If req.query is empty does not send an error
-              
+        //If req.validationResult iis not undefines throws an error in case the the req.query don´t validate   
         if(req.validationResult !== undefined){
             validationResult(req).throw();                
         }
