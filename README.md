@@ -1,4 +1,4 @@
-<p align=center><img src="data/Nodepop-readme.png"></p>
+<p align=center><img src="data/nodepop.png"></p>
 
 
 Nodepop is a web-API made with Nodejs and Express to buy anda sell second-hand items.
