@@ -6,7 +6,6 @@ Nodepop is a web-API made with Nodejs and Express to buy anda sell second-hand i
 This is a project of the Web Development Bootcamp of Keepcoding.
 
 ## Installation
-___
 
 ```shell
 npm install
@@ -16,7 +15,6 @@ Copy .env.example to .env and review values
 
 
 ## Database
-___
 
 
 This API has been made using Mongoose and MongoDB.
@@ -43,7 +41,6 @@ const addSchema = mongoose.Schema({
 You must follow this schema to create new adds.
 
 ## Run
-___
 
 To start the application in production use:
 
@@ -54,7 +51,6 @@ npm start
 
 
 ## Development
-___
 
 To start the application in development use:
 
@@ -63,22 +59,22 @@ npm run dev
 ```
 
 
-## Guide if use
-___
+## Guide of use
+
 
 Nodepop is an API that provides a list of second-hand items. The API supports the following operations:
 
 - Paginated adds list (*skip, limit, sort*) and filter (by *name*, *tags*, *price* and *toSell* ).
 - List of existing tags.
-- Create new adds
+- Create new adds.
 
 ### **Applying filters**
 
 To aplly filters by *price range* you need to consider the following rules:
-- 10-50 :  Use the "-" to specify a **range** between two values.
+- 10-50 :  Use the "**-**" to specify a **range** between two values.
 - 50 : If you write just a value, it will return all the adds that **matches** that value.
-- 50- :Use "-" after the value to look fot the adds that are **equal or greater** than that value.
-- -50 : Use "-" after the value to look fot the adds that are **equal or less** than that value.
+- 50- :Use "**-**" after the value to look fot the adds that are **equal or greater** than that value.
+- -50 : Use "**-**" after the value to look fot the adds that are **equal or less** than that value.
 
 To get a list of all existing tag you must pass the word "**tags**" as a param in the URL and it will return the current list of tags.
 
@@ -87,7 +83,7 @@ The toSell property is a boolean so you have to write *true* to see the selling 
 
 ### **Creating new adds**
 
-When creating a new add using the *POST* method (in Postman, for instance) you can upload an image which will be saved in the "uploads" folder, inside of ./public/images
+When creating a new add using the *POST* method (in Postman, for instance) you can upload an image which will be saved in the "uploads" folder, inside of ./public/images.
 
 ### **Web Client**
 
