@@ -45,6 +45,6 @@ async function initAdds(adds){
     const deleted = await Add.deleteMany();
     console.log(`${deleted.n} adds deleted`);
     // charge new documents
-   const inserted = await Add.insertMany(adds);
-   console.log(`${inserted.length} adds inserted`);
+    const inserted = await Add.insertMany(adds);   
+    console.log(`${inserted.length} adds inserted`);
 }

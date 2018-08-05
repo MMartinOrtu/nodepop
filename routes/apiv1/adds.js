@@ -30,10 +30,10 @@ router.get('/:tags?', Add.listOfTags);
  * Create an add
  */
 router.post('/', upload.single('picture'),[
-    body('name').isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
-    body('toSell').isBoolean().withMessage('debe ser un valor booleano'),
-    body('price').isNumeric().withMessage('debe ser un valor numérico'),
-    body('tags').isAlpha().withMessage('debe contener solo letras')     
+    body('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
+    body('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
+    body('price').optional({checkfalsy:true}).isNumeric().withMessage('debe ser un valor numérico'),
+    body('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')     
 ], Add.newAdd);
 
 module.exports = router;

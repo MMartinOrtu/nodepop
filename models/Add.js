@@ -14,6 +14,10 @@ const addSchema = mongoose.Schema({
     tags: [String] 
 });
 
+// create indexes for that schema
+addSchema.index({name:1});
+addSchema.index({price:1});
+
 // get the request params in query string
 addSchema.statics.getAdds = async function (req, res, next){    
     try{     
@@ -121,8 +125,5 @@ function sendResult(result, view, req, res){
 
 // create the model with the schema
 const Add = mongoose.model('Add', addSchema);
-
-
-
 
 module.exports = Add;
