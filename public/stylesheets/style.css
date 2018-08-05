@@ -9,20 +9,21 @@ a {
 h1 {
   margin:.5rem;
   font-size: 8rem;
-  text-align: center;
-  color:rgb(221, 152, 4)
+  text-align: center;  
+  color: rgb(109, 24, 158);
 }
 h3 {
   margin:.5rem;
   font-size: 3rem;
   text-align: center;
-  color: rgb(230, 252, 32);
+  color:rgb(221, 134, 4);
+  
 }
 h5{ 
   margin:.3rem;
   font-size: 1.5rem;
   text-align: center;  
-  color:rgb(5, 104, 82);   
+  color:rgb(37, 187, 155);   
 }
 .wrapper{
   display:grid;  
@@ -48,11 +49,11 @@ p{
 .add-wrapper p:first-of-type {
   font-size:2rem;
   font-weight: bold;
-  color: rgb(221, 152, 4);
+  color: rgb(109, 24, 158);
   text-align: center;
 }
 .add-wrapper p:nth-last-child(3) {
-   color:rgb(230, 252, 32);
+   color:rgb(221, 134, 4);
 }
 #price{
   font-size: 2rem;
@@ -60,7 +61,7 @@ p{
 }
 .add-wrapper p:last-child {
   font-size:.9rem;
-  color:rgb(5, 104, 82); 
+  color:rgb(37, 187, 155); 
 }
 ul{
   padding: 0;
