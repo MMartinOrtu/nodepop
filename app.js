@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const authenticate = require('./routes/apiv1/authenticate');
 
 const {isAPI} = require('./lib/utils');
 
@@ -33,7 +34,7 @@ app.locals.title = 'Nodepop';
  * API routes
  */
 app.use('/apiv1/adds', require('./routes/apiv1/adds'));
-
+app.post('/apiv1/authenticate', authenticate.postJWT);
 /**
  * web app routes
  */

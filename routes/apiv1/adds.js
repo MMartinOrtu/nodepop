@@ -7,16 +7,19 @@ const{query, body} = require('express-validator/check');
 
 //  require AddSchema
 const Add = require('../../models/Add');
+const jwtAuth = require('../../lib/jwtAuth');
+
+router.use(jwtAuth());
 
 /**
  * GET /
  * Returns a list of adds
  */
-router.get('/',[    
+router.get('/',[
     query('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
     query('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
-    query('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')            
-], 
+    query('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')
+],
  Add.getAdds);
 
 /**

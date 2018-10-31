@@ -7,32 +7,29 @@ const {isAPI} = require('../lib/utils');
 
 // define the schema
 const addSchema = mongoose.Schema({
-    name: String,
-    toSell: Boolean,
-    price: Number,
+    name: { type: String, index: true },
+    toSell: { type: Boolean, index: true},
+    price: { type: Number, index: true },
     picture: String,
-    tags: [String] 
+    tags: { type: [String], index: true }
 });
 
-// create indexes for that schema
-addSchema.index({name:1});
-addSchema.index({price:1});
 
 // get the request params in query string
-addSchema.statics.getAdds = async function (req, res, next){    
-    try{     
+addSchema.statics.getAdds = async function (req, res, next){
+    try{
         validationResult(req).throw();
 
         // get entry data
-        const name = req.query.name; 
+        const name = req.query.name;
         const toSell = req.query.toSell;
         const price = req.query.price;
         const tags = req.query.tags;
         const limit = parseInt(req.query.limit);
         const skip = parseInt(req.query.skip);
         const fields = req.query.fields;
-        const sort = req.query.sort;
-        
+        const sort = req.query.sort || '_id';
+
         //create empty filter
         const filter ={};
 
@@ -44,22 +41,22 @@ addSchema.statics.getAdds = async function (req, res, next){
         }
         if(price){
            const priceRange = price.split("-");
-           
+
            if(priceRange.length === 1){
-               filter.price = {$eq: price}; 
+               filter.price = {$eq: price};
            }else if(priceRange[0]=== ""){
-                filter.price = {$lte: priceRange[1]}; 
+                filter.price = {$lte: priceRange[1]};
            }else if(priceRange[1]=== ""){
             filter.price = {$gte: priceRange[0]};
            }else{
             filter.price = {$gte: priceRange[0], $lte: priceRange[1]};
-           }                
+           }
         }
         if(tags){
             const arraytags = tags.split(" ");
             filter.tags = {$in: arraytags};
         }
-        
+
         const adds = await Add.getList(filter, limit, skip, fields, sort);
         sendResult(adds, 'index', req, res);
 
