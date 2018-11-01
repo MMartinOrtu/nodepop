@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const{validationResult} = require('express-validator/check');
 
 const {isAPI} = require('../lib/utils');
-const makeRequest = require('../services/thumbnailClient');
+const createThumbnail = require('../services/thumbnailClient');
 
 // define the schema
 const addSchema = mongoose.Schema({
@@ -95,9 +95,8 @@ addSchema.statics.newAdd = async function (req, res, next){
 
         //if a picture is uploaded, set the route file in the picture property
         if(req.file){
-          makeRequest(req.file)
+          await createThumbnail(req.file).then( pathToThumbnail => dataAdd.thumbnail = pathToThumbnail)
           dataAdd.picture = '/images/uploads/'+ req.file.filename;
-          dataAdd.thumbnail = `/images/uploads/thumbnail-${req.file.filename}`;
         }
 
         //Create an add in memory
