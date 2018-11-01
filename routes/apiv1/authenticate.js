@@ -24,7 +24,7 @@ class Authenticate {
 
             // if user find and  password ok
             jwt.sign({_id: user._id}, process.env.JWT_SECRET, {
-                expiresIn: '2m'
+                expiresIn: '2d'
             }, (err, token) => {
                 if(err){
                     netx(err);

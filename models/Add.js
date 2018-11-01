@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const{validationResult} = require('express-validator/check');
 
 const {isAPI} = require('../lib/utils');
+const makeRequest = require('../services/thumbnailClient');
 
 // define the schema
 const addSchema = mongoose.Schema({
@@ -11,6 +12,7 @@ const addSchema = mongoose.Schema({
     toSell: { type: Boolean, index: true},
     price: { type: Number, index: true },
     picture: String,
+    thumbnail:String,
     tags: { type: [String], index: true }
 });
 
@@ -19,7 +21,6 @@ const addSchema = mongoose.Schema({
 addSchema.statics.getAdds = async function (req, res, next){
     try{
         validationResult(req).throw();
-
         // get entry data
         const name = req.query.name;
         const toSell = req.query.toSell;
@@ -94,17 +95,19 @@ addSchema.statics.newAdd = async function (req, res, next){
 
         //if a picture is uploaded, set the route file in the picture property
         if(req.file){
-          dataAdd.picture = 'images/uploads/'+ req.file.filename;
+          makeRequest(req.file)
+          dataAdd.picture = '/images/uploads/'+ req.file.filename;
+          dataAdd.thumbnail = `/images/uploads/thumbnail-${req.file.filename}`;
         }
 
         //Create an add in memory
         const add = new Add(dataAdd);
-        
+
         //Save the add in th database
          const addSaved = await add.save();
- 
+
          sendResult(addSaved, '', req, res);
- 
+
      }catch(err){
         next(err);
      }
