@@ -1,0 +1,13 @@
+{
+	"List of adds": "Listado de anuncios",
+	"To sell": "Se vende",
+	"Add picture": "Imagen del producto",
+	"To buy": "Se compra",
+	"List of tags": "Lista de tags",
+	"Invalid credentials": "Credenciales incorrectas",
+	"Not valid": "Incorrecto",
+	"should be an alfanumeric value": "debe ser un valor alfanumérico",
+	"should be a boolean value": "debe ser un valor booleano",
+	"only allow characters": "solo permite caracteres",
+	"only allow numbers": "solo permite números"
+}

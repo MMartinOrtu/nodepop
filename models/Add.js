@@ -78,7 +78,7 @@ addSchema.statics.getList = function(filter, limit, skip, fields, sort){
 //returns a list of tags
 addSchema.statics.listOfTags = async function(req, res, next){
     try{
-        const data = req.params.tags;       
+        const data = req.params.tags;
         const tagslist = await Add.distinct(data).exec()
 
         sendResult(tagslist, 'listOfTags', req, res);

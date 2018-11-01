@@ -8,7 +8,7 @@ const{query, body} = require('express-validator/check');
 //  require AddSchema
 const Add = require('../../models/Add');
 const jwtAuth = require('../../lib/jwtAuth');
-
+const i18n = require('i18n');
 router.use(jwtAuth());
 
 /**
@@ -16,9 +16,9 @@ router.use(jwtAuth());
  * Returns a list of adds
  */
 router.get('/',[
-    query('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
-    query('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
-    query('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')
+    query('name').optional({checkfalsy:true}).isAlphanumeric().withMessage(`${i18n.__('should be an alfanumeric value')}`),
+    query('toSell').optional({checkfalsy:true}).isBoolean().withMessage(`${i18n.__('should be a boolean value')}`),
+    query('tags').optional({checkfalsy:true}).isAlpha().withMessage(`${i18n.__('only allow characters')}`)
 ],
  Add.getAdds);
 
@@ -33,10 +33,10 @@ router.get('/:tags?', Add.listOfTags);
  * Create an add
  */
 router.post('/', upload.single('picture'),[
-    body('name').optional({checkfalsy:true}).isAlphanumeric().withMessage('debe ser un valor alfanumérico'),
-    body('toSell').optional({checkfalsy:true}).isBoolean().withMessage('debe ser un valor booleano'),
-    body('price').optional({checkfalsy:true}).isNumeric().withMessage('debe ser un valor numérico'),
-    body('tags').optional({checkfalsy:true}).isAlpha().withMessage('debe contener solo letras')     
+    body('name').optional({checkfalsy:true}).isAlphanumeric().withMessage(`${i18n.__('should be an alfanumeric value')}`),
+    body('toSell').optional({checkfalsy:true}).isBoolean().withMessage(`${i18n.__('should be a boolean value')}`),
+    body('price').optional({checkfalsy:true}).isNumeric().withMessage(`${i18n.__('only allow numbers')}`),
+    body('tags').optional({checkfalsy:true}).isAlpha().withMessage(`${i18n.__('only allow characters')}`)     
 ], Add.newAdd);
 
 module.exports = router;

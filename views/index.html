@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%=title%></title>   
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%=title%></h1>
-    <h3>Listado de anuncios</h3>
-    <div class="wrapper">     
+<% include header.html %>
+
+    <h3><%=__('List of adds') %></h3>
+    <div class="wrapper">
       <% adds.forEach(function(add){ %>
         <div class="add-wrapper">
-          <h5><%= add.toSell? 'Se vende': 'Se compra'%></h5>
+          <h5><%= add.toSell? __('To sell') : __('To buy') %></h5>
           <p><%= add.name %></p>
           <p><span id="price"><%=add.price%></span>&nbsp;Euros</p>
-          <img src="<%=add.picture %>" alt="Foto del anuncio" height="150">
+          <img src="<%=add.picture %>" alt="<%=__('Add picture') %>"" height="150">
           <p><%= add.tags %></p>
         </div>
       <% }) %>

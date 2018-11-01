@@ -18,7 +18,7 @@ class Authenticate {
             const user = await User.findOne({email: email});
 
             if(!user || !await bcrypt.compare(password, user.password)){
-                res.json({ success: false, error: /* res.__( */'Invalid credentials'/* ) */})
+                res.json({ success: false, error: res.__('Invalid credentials')})
                 return;
             }
 

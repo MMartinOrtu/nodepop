@@ -21,6 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Express multilanguage set-up
+const i18n = require('./lib/i18nConfigure')();
+app.use(i18n.init);
+
 /**
  * Mongo DB connection
  * and models register
@@ -39,6 +43,7 @@ app.post('/apiv1/authenticate', authenticate.postJWT);
  * web app routes
  */
 app.use('/',           require('./routes/index'));
+app.use('/lang',       require('./routes/lang'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,12 +58,12 @@ app.use(function(err, req, res, next) {
     err.status = 422;
     const errorInfo = err.array({onlyFirstError: true})[0];
     err.message = isAPI(req) ?
-    {message: 'Not valid', errors: err.mapped()}
-    : `Not valid - ${errorInfo.param} ${errorInfo.msg}`;
+    {message: res.__('Not valid'), errors: err.mapped()}
+    : `${res.__('Not valid')} - ${errorInfo.param}  ${errorInfo.msg}`;
   }
-  
+
   res.status(err.status || 500);
-  
+
   if(isAPI(req)){
     res.json({success: false, error: err.message});
     return;
@@ -69,7 +74,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  
+
   res.render('error');
 });
 

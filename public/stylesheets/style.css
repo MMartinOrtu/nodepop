@@ -4,7 +4,7 @@ body {
   background-color: rgb(37, 187, 155); 
 }
 a {
-  color: #00B7FF;
+  color: white;
 }
 h1 {
   margin:.5rem;
@@ -12,6 +12,14 @@ h1 {
   text-align: center;  
   color: rgb(109, 24, 158);
 }
+
+.lang-selector{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.2rem;
+}
+
 h3 {
   margin:.5rem;
   font-size: 3rem;
