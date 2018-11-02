@@ -2,9 +2,8 @@
 
 const mongoose = require('mongoose');
 const{validationResult} = require('express-validator/check');
-
+const cote = require('cote');
 const {isAPI} = require('../lib/utils');
-const createThumbnail = require('../services/thumbnailClient');
 
 // define the schema
 const addSchema = mongoose.Schema({
@@ -63,7 +62,7 @@ addSchema.statics.getAdds = async function (req, res, next){
 
     }catch(err){
         next(err);
-    } 
+    }
 }
 
 // returns a list of adss, appliying filters
@@ -94,24 +93,26 @@ addSchema.statics.newAdd = async function (req, res, next){
         const dataAdd = req.body;
 
         if(req.file){
-            //set the path to the image in the new Add object
-            dataAdd.picture = '/images/uploads/'+ req.file.filename;
-
-            // Call the microservice requester to create a thumbnail
-            const pathToThumbnail = await createThumbnail(req.file)
-            // If the thumbnail is created correctly set the path to the new add object
-            if (pathToThumbnail){
-                dataAdd.thumbnail = pathToThumbnail;
-            }
+            const pathToImageLoaded = '/images/uploads/'+ req.file.filename;
+            //set a new property in the new add ocbject with the  image´s path
+            dataAdd.picture = pathToImageLoaded;
+            //Create the requester and send the task to the  microservice
+            const requester = new cote.Requester({ name: 'image thumbnail creation'});
+            await requester.send({
+                    type: 'resize',
+                    picture: req.file
+                },  async (routeToThumbnail) =>{
+                    await Add.updateOne({picture: pathToImageLoaded}, {$set: {thumbnail:routeToThumbnail}})
+                })
         }
 
         //Create an add in memory
         const add = new Add(dataAdd);
 
         //Save the add in th database
-         const addSaved = await add.save();
+        const addSaved = await add.save();
 
-         sendResult(addSaved, '', req, res);
+        sendResult(addSaved, '', req, res);
 
      }catch(err){
         next(err);

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodepop:* nodemon",
-    "install_db": "node install_db.js"
+    "install_db": "node install_db.js",
+    "thumbnailService": "nodemon services/thumbnailService.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.2",

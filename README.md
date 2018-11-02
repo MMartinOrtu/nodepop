@@ -85,6 +85,15 @@ The toSell property is a boolean so you have to write *true* to see the selling 
 
 When creating a new add using the *POST* method (in Postman, for instance) you can upload an image which will be saved in the "uploads" folder, inside of ./public/images.
 
+### **Thumbnail microservice**
+
+To create a Thumbnail of every image you upload when creating a new add, you must run the microservice "thumbnailService.js".
+
+To run thumbnailService.js  use:
+```
+npm run thumbnailService
+```
+
 ### **Web Client**
 
 There is and index.html view from which you can view the list of adds and apply the same filters and paginated list than in the API. You can also get the list of tags by writing  */tags* in the URL.
