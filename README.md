@@ -89,9 +89,13 @@ When creating a new add using the *POST* method (in Postman, for instance) you c
 
 To create a Thumbnail of every image you upload when creating a new add, you must run the microservice "thumbnailService.js".
 
-To run thumbnailService.js  use:
+To run thumbnailService.js  first:
 ```
-npm run thumbnailService
+cd services/
+```
+and once in the service directory enter:
+```
+nodemon thumbnailService.js
 ```
 
 ### **Web Client**
