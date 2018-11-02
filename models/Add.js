@@ -93,10 +93,16 @@ addSchema.statics.newAdd = async function (req, res, next){
     try{
         const dataAdd = req.body;
 
-        //if a picture is uploaded, set the route file in the picture property
         if(req.file){
-          await createThumbnail(req.file).then( pathToThumbnail => dataAdd.thumbnail = pathToThumbnail)
-          dataAdd.picture = '/images/uploads/'+ req.file.filename;
+            //set the path to the image in the new Add object
+            dataAdd.picture = '/images/uploads/'+ req.file.filename;
+
+            // Call the microservice requester to create a thumbnail
+            const pathToThumbnail = await createThumbnail(req.file)
+            // If the thumbnail is created correctly set the path to the new add object
+            if (pathToThumbnail){
+                dataAdd.thumbnail = pathToThumbnail;
+            }
         }
 
         //Create an add in memory
