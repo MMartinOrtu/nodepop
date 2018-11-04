@@ -96,17 +96,17 @@ addSchema.statics.newAdd = async function (req, res, next){
             const pathToImageLoaded = '/images/uploads/'+ req.file.filename;
             //set a new property in the new add ocbject with the  image´s path
             dataAdd.picture = pathToImageLoaded;
+
             //Create the requester and send the task to the  microservice
-            //
+            //The microservice return a path to the thumbnail, which is saved in the database
             const requester = new cote.Requester({ name: 'image thumbnail creation'});
             await requester.send({
                     type: 'resize',
                     picture: req.file
-                },  async (routeToThumbnail) =>{
-                    await Add.updateOne({picture: pathToImageLoaded}, {$set: {thumbnail:routeToThumbnail}})
+                },  async (pathToThumbnail) =>{
+                    await Add.updateOne({picture: pathToImageLoaded}, {$set: {thumbnail:pathToThumbnail}})
                 })
         }
-
         //Create an add in memory
         const add = new Add(dataAdd);
 
@@ -114,7 +114,6 @@ addSchema.statics.newAdd = async function (req, res, next){
         const addSaved = await add.save();
 
         sendResult(addSaved, '', req, res);
-
      }catch(err){
         next(err);
      }

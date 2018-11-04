@@ -5,7 +5,7 @@ Nodepop is a web-API made with Nodejs and Express to buy anda sell second-hand i
 
 This is a project of the Web Development Bootcamp of Keepcoding.
 
-## Installation
+## Instalation
 
 ```shell
 npm install
@@ -24,7 +24,7 @@ To initialize the database use:
 npm run install_db
 ```
 
-By doing this you delete all the items you had in your database (in case you had any) and initialize the database with 5 new items. 
+By doing this you delete all the items you had in your database (in case you had any) and initialize the database with 5 new items and 1 user for the API.
 
 You can check the JSON used to initialize the database in *./data/adds.json*
 
@@ -48,8 +48,6 @@ To start the application in production use:
 npm start
 ```
 
-
-
 ## Development
 
 To start the application in development use:
@@ -60,13 +58,27 @@ npm run dev
 
 
 ## Guide of use
-
-
 Nodepop is an API that provides a list of second-hand items. The API supports the following operations:
 
 - Paginated adds list (*skip, limit, sort*) and filter (by *name*, *tags*, *price* and *toSell* ).
 - List of existing tags.
 - Create new adds.
+### **Authentication**
+
+To access API data authentication is required. The API use JWT to authenticate.
+
+ Once you initialize the data base  you can use these default user credentials:
+
+ ```
+ email: user@example.com
+ password: 1234
+ ```
+
+ to authenticate use POST method in the route:
+
+ ```
+ /apiv1/authenticate
+ ```
 
 ### **Applying filters**
 
