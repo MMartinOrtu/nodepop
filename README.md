@@ -12,10 +12,7 @@ npm install
 ```
 Copy .env.example to .env and review values
 
-
-
 ## Database
-
 
 This API has been made using Mongoose and MongoDB.
 
@@ -55,14 +52,6 @@ To start the application in development use:
 ```shell
 npm run dev
 ```
-
-
-## Guide of use
-Nodepop is an API that provides a list of second-hand items. The API supports the following operations:
-
-- Paginated adds list (*skip, limit, sort*) and filter (by *name*, *tags*, *price* and *toSell* ).
-- List of existing tags.
-- Create new adds.
 ### **Authentication**
 
 To access API data authentication is required. The API use JWT to authenticate.
@@ -79,6 +68,35 @@ To access API data authentication is required. The API use JWT to authenticate.
  ```
  /apiv1/authenticate
  ```
+
+This will return a **token** you will have to use when you make a call to the API. You can use it in the query string as follows:
+```
+/apiv1/authenticate/?token=<generatedtoken>
+```
+The token expires in two days.
+
+### **Thumbnail microservice**
+
+To create a Thumbnail of every image you upload when creating a new add, you must run the microservice "thumbnailService.js".
+
+To run thumbnailService.js:
+```
+npm run thumbnailService
+```
+## Tests
+
+To run tests enter:
+```
+npm test
+```
+
+## Guide of use
+Nodepop is an API that provides a list of second-hand items. The API supports the following operations:
+
+- Paginated adds list (*skip, limit, sort*) and filter (by *name*, *tags*, *price* and *toSell* ).
+- List of existing tags.
+- Create new adds.
+
 
 ### **Applying filters**
 
@@ -97,18 +115,6 @@ The toSell property is a boolean so you have to write *true* to see the selling 
 
 When creating a new add using the *POST* method (in Postman, for instance) you can upload an image which will be saved in the "uploads" folder, inside of ./public/images.
 
-### **Thumbnail microservice**
-
-To create a Thumbnail of every image you upload when creating a new add, you must run the microservice "thumbnailService.js".
-
-To run thumbnailService.js  first:
-```
-cd services/
-```
-and once in the service directory enter:
-```
-nodemon thumbnailService.js
-```
 
 ### **Web Client**
 

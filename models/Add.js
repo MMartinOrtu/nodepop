@@ -97,8 +97,14 @@ addSchema.statics.newAdd = async function (req, res, next){
             //set a new property in the new add ocbject with the  image´s path
             dataAdd.picture = pathToImageLoaded;
 
-            //Create the requester and send the task to the  microservice
-            //The microservice return a path to the thumbnail, which is saved in the database
+            /**
+             * Create the requester and send the task of creating a thumbnail
+             * to the  microservice.
+             * The microservice return a path to the thumbnail
+             * which is saved in the database
+             * although is not return in the API answer to POST,
+             * it will appear when calling the API with the GET method
+             */
             const requester = new cote.Requester({ name: 'image thumbnail creation'});
             await requester.send({
                     type: 'resize',
