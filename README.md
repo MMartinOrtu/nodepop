@@ -5,7 +5,7 @@ Nodepop is a web-API made with Nodejs and Express to buy anda sell second-hand i
 
 This is a project of the Web Development Bootcamp of Keepcoding.
 
-## Despligue práctica DevOps
+## Despliegue práctica DevOps
 
 La aplicación nodepop ha sido desplegueada usando un servidor en AWS con NGNIX y PM2.
 
