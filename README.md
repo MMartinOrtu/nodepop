@@ -9,7 +9,8 @@ This is a project of the Web Development Bootcamp of Keepcoding.
 
 La aplicación nodepop ha sido desplegueada usando un servidor en AWS con NGNIX y PM2.
 
-[http://ec2-3-90-181-23.compute-1.amazonaws.com/]([http://ec2-3-90-181-23.compute-1.amazonaws.com/)
+[http://ec2-3-90-181-23.compute-1.amazonaws.com/](http://ec2-3-90-181-23.compute-1.amazonaws.com/)
+
 
 Para la página estática he usado la web de la práctica de Fundamentos de FrontEnd en lugar de una plantilla HTML.
 
